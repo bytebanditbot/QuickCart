@@ -2,18 +2,18 @@ import { Inngest } from "inngest";
 import connectDB from "./db";
 
 // Create a client to send and receive events
-export const inngest = new Inngest({ id: "quickcart-next" });
+export const inngest = new Inngest({ id: "quickcart" });
 
 // Inngest Function to save user data to a database
 export const syncUserCreation = inngest.createFunction(
     {
-        id: 'sync-user-from-clerk'
+        id: 'quickcart-sync-user-created',
     },
     {
         event: 'clerk/user.created'
     },
     async ({ event }) => {
-        const { id, first_name, last_name, memail_addresses, image_url } = event.data
+        const { id, first_name, last_name, email_addresses, image_url } = event.data
         const userData = {
             _id: id,
             email: email_addresses[0].email_addresses,
@@ -21,16 +21,16 @@ export const syncUserCreation = inngest.createFunction(
             imageUrl: image_url
         }
         await connectDB()
-        await User.Create(userData)
+        await User.create(userData)
     }
 )
 
 
 
-// Inngest Function to update user data in the database
+// Updade
 export const syncUserUpdation = inngest.createFunction(
     {
-        id: 'sync-user-from-clerk'
+        id: 'quickcart-sync-user-updated', // UNIQUE ID
     },
     {
         event: 'clerk/user.updated'
@@ -39,7 +39,7 @@ export const syncUserUpdation = inngest.createFunction(
         const { id, first_name, last_name, memail_addresses, image_url } = event.data
         const userData = {
             _id: id,
-            email: email_addresses[0].email_addresses,
+            email: email_addresses[0].email,
             name: first_name + ' ' + last_name,
             imageUrl: image_url
         }
@@ -50,10 +50,10 @@ export const syncUserUpdation = inngest.createFunction(
 
 
 
-// Inngest Function to delete user from database
+// Delete
 export const syncUserDeletion = inngest.createFunction(
     {
-        id: 'sync-user-from-clerk'
+        id: 'quickcart-sync-user-deleted', // Unique id
     },
     {
         event: 'clerk/user.deleted'
