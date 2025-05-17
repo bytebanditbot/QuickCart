@@ -34,6 +34,7 @@ export const syncUserUpdation = inngest.createFunction(
         id: 'quickcart-sync-user-updated', // UNIQUE ID
     },
     {
+        
         event: 'clerk/user.updated'
     },
     async ({ event }) => {
