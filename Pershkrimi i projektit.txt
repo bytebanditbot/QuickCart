@@ -1,3 +1,8 @@
 1.Fillim e kom marr dokumentin prej GitHub me Git clone edhe e kom vendos url 
 2.tani kom shti ni sign up e kom marr prej Clerk si te gatshme e kom implementu
 3. i kom shtu do butona Home Products Cart My orders
+
+4. implementimi i Mongodb 
+npm i mongoose
+aliloviqflamur PoJu2HSKXda8jFfk
+mongodb+srv://aliloviqflamur:PoJu2HSKXda8jFfk@cluster0.7wrt2oj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
